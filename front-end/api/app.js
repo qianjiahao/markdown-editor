@@ -46,6 +46,20 @@ var app = angular.module('app',['ngSanitize']);
 			    }
 		    }
 		})
+		.directive('auto', function ($window) {
+			return {
+				restrict: 'A',
+				link: function (scope, element, attrs) {
+					function update() {
+						element.scrollTop = element.scrollHeight;
+					}
+					scope.$watch(attrs.ngModel, function() {
+						update();
+					});
+					attrs.$set('ngTrim','false');
+				}
+			}
+		})
 		// .directive('autoGrow', function() {
 		// 	return {
 		// 		restrict: 'A',

@@ -48,7 +48,6 @@ a{
 .right{
 	float: left;
 	width: 50%;
-	overflow: hidden;
 	padding: 10px;
 }
 .main{
