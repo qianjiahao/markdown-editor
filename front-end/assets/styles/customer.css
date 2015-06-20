@@ -1,0 +1,94 @@
+/*tag*/
+
+html,body{
+	height: 100%;
+	margin: 0;
+}
+
+@media screen and (max-width: 992px) {
+	html,body{
+		height: 50%;
+	}
+}
+
+a{
+	text-decoration: none;
+	outline: none;
+}
+
+/*tag*/
+
+
+.container{
+	width: 90%;
+	margin: 0 auto;
+	height: auto;
+}
+
+.navbar{
+	position: fixed;
+	width: 100%;
+	height: 60px;
+	margin: 0;
+	padding: 0;
+	line-height: 24px;
+}
+
+.title{
+	padding: 18px 0;
+	font-size: 24px;
+	color: #eee;
+	cursor: pointer;
+	line-height: 24px;
+}
+
+.title-right{
+	float: right;
+	text-align: right;
+}
+
+.left,
+.right{
+	float: left;
+	width: 50%;
+	overflow: hidden;
+}
+.padding-top{
+	padding-top: 70px;
+}
+.padding-left{
+	padding-left: 10px;
+}
+.padding-right{
+	padding-right: 10px;
+}
+.inputText,
+.outputText{
+	width: 100%;
+	padding: 15px;
+	border-radius: 4px;
+	border: 1px solid #eee;
+	outline: none;
+	font-size: 16px;
+	overflow: auto;
+}
+
+.fill{
+	height: 100%;
+		box-sizing:border-box; 
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+
+/*color*/
+
+.bg-black{
+	background-color: #333;
+}
+.col-white{
+	color: #ccc;
+}
+.col-black{
+	color: #555;
+}
+/*color*/
