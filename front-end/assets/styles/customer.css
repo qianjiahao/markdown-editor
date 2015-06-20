@@ -84,6 +84,11 @@ a{
 	}
 
 }
+@media screen and (max-width: 400px) {
+	.title-right{
+		display: none;
+	}
+}
 /*color*/
 
 .bg-black{
