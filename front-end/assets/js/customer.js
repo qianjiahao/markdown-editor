@@ -41,7 +41,7 @@ function export_raw(name, data) {
     fake_click(save_link);
 }
 
-function toMarkdown() {
+function toText() {
 	export_raw('download.txt', document.getElementById('inputText').value);
 };
 
