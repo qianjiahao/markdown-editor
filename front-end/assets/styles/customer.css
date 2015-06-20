@@ -39,6 +39,9 @@ a{
 	line-height: 24px;
 }
 
+.title a{
+	margin-left: 15px;
+}
 .title-right{
 	float: right;
 	text-align: right;
@@ -71,6 +74,7 @@ a{
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 }
+
 
 @media screen and (max-width: 992px) {
 	.left,.right{
