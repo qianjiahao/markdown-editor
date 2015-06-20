@@ -6,11 +6,7 @@ html,body{
 	background-color: #F9F9F5;
 }
 
-@media screen and (max-width: 992px) {
-	html,body{
-		height: 50%;
-	}
-}
+
 
 a{
 	text-decoration: none;
@@ -53,16 +49,12 @@ a{
 	float: left;
 	width: 50%;
 	overflow: hidden;
+	padding: 10px;
 }
-.padding-top{
+.main{
 	padding-top: 70px;
 }
-.padding-left{
-	padding-left: 10px;
-}
-.padding-right{
-	padding-right: 10px;
-}
+
 .inputText,
 .outputText{
 	width: 100%;
@@ -76,11 +68,19 @@ a{
 
 .fill{
 	height: 100%;
-		box-sizing:border-box; 
+	box-sizing:border-box; 
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 }
 
+@media screen and (max-width: 992px) {
+	.left,.right{
+		height: 50%;
+		width: 100%;
+		float: left;
+	}
+
+}
 /*color*/
 
 .bg-black{
