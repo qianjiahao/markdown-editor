@@ -19,10 +19,10 @@
 
   <div class="container fill main" ng-controller="MarkdownController">
     <div class="left fill padding-right">
-      <textarea class="inputText fill col-black" id="inputText" ng-model="inputText" onkeydown="updateViewHeight()" marked auto-grow></textarea>
+      <textarea class="inputText fill col-black" ng-model="inputText" onkeydown="updateViewHeight()" marked></textarea>
     </div>
     <div class="right fill padding-left">
-      <div class="outputText fill" id="outputText" ng-bind-html="outputText" ng-model="inputText" auto></div>
+      <div class="outputText fill" id="outputText" ng-bind-html="outputText"></div>
     </div>
   </div>
 
