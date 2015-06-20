@@ -18,6 +18,6 @@ function updateViewHeight() {
 		timer = setTimeout(function () {
 			outputText.scrollTop = outputText.scrollHeight;
 			console.log(outputText);
-		},550);
+		},350);
 	}
 }
