@@ -6,7 +6,6 @@ function updateViewHeight() {
 	var scrollTop = outputText.scrollTop;
 	var offsetHeight = outputText.offsetHeight;
 
-
 	// if customer move the window more than 1/10 offsetHeight , the auto update view will disabled .
 	var isUpdate = scrollTop + offsetHeight / 10 > scrollHeight - offsetHeight ;
 

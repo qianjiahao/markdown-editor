@@ -10,13 +10,6 @@
     "markdown"
   ],
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
     "angular": "~1.4.1",
     "angular-sanitize": "~1.4.1",
