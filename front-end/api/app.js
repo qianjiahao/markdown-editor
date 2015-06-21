@@ -20,12 +20,16 @@ var app = angular.module('app',['ngSanitize']);
 
 
 	app
-		.controller('MarkdownController', ['$scope', '$document', function ($scope, $document) {
+		.controller('MarkdownController', ['$scope', function ($scope) {
 			$scope.inputText = '';
 
 			$scope.$watch('inputText', function(current) {
 				$scope.outputText = marked(current);
 			});
+
+			$scope.clean = function () {
+				$scope.inputText = '';
+			}
 		}])
 		.directive('marked', function () {
 		    return {

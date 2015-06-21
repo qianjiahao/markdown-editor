@@ -1,6 +1,6 @@
 {
   "name": "markdown-editor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/qianjiahao/markdown-editor",
   "authors": [
     "qianjiahao <1041897388@qq.com>"
@@ -10,16 +10,8 @@
     "markdown"
   ],
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
     "angular": "~1.4.1",
-    "bootstrap": "~3.3.5",
     "angular-sanitize": "~1.4.1",
     "marked": "~0.3.3",
     "highlightjs": "~8.5.0"
