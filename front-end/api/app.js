@@ -31,7 +31,7 @@ var app = angular.module('app',['ngSanitize']);
 				$scope.inputText = '';
 			}
 		}])
-		.directive('marked', function () {
+		.directive('tab', function () {
 		    return {
 		    	restrict: 'A',
 			    link: function (scope, element, attrs) {
