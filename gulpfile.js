@@ -1,66 +1,105 @@
 var gulp = require('gulp');
-var livereload = require('gulp-livereload');
-var jslint = require('gulp-jslint');
+var minifyCSS = require('gulp-minify-css');
 var less = require('gulp-less');
+var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
-var minify = require('gulp-minify-css');
-var gutil = require('gulp-util');
+var jslint  = require('gulp-jslint');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var sourcemaps = require('gulp-sourcemaps');
+var livereload = require('gulp-livereload');
+
+var guitl = require('gulp-util');
+var plumber = require('gulp-plumber');
 var combine = require('stream-combiner2');
 
-function errorHandle(err) {
-	var colors = gutil.colors;
+/*
+	config path 
+ */
+
+var path = {
+	lessPath: 'front-end/assets/styles/**.less',
+	jsPath: 'front-end/assets/js/**.js',
+	angularJSPath: 'front-end/api/**.js',
+	
+	cleanPath: 'front-end/dist/**',
+	destLessPath: 'front-end/dist/assets/styles',
+	destJSPath: 'front-end/dist/assets/js',
+	destAngularJSPath : 'front-end/dist/api'
+}
+
+/*
+	config path
+ */
+
+
+function log(err) {
+	var colors = guitl.colors;
 	console.log('\n');
-	gutil.log(colors.red('Error'));
-	gutil.log('fileName : ' + colors.red(err.fileName));
-	gutil.log('lineNumber : ' + colors.red(err.lineNumber));
-	gutil.log('message : ' + colors.red(err.message));
-	gutil.log('plugin : ' + colors.red(err.plugin));
+	guitl.log(colors.red('Error'));
+	guitl.log('fileName : ' + colors.red(err.fileName));
+	guitl.log('lineNumber : ' + colors.red(err.lineNumber));
+	guitl.log('message : ' + colors.red(err.message));
+	guitl.log('plugin : ' + colors.red(err.plugin));
 	console.log('\n');
 }
 
-gulp.task('uglifyAngular', function () {
-	var conbined = combine.obj([
-		gulp.src('front-end/api/**.js'),
-		uglify(),
-		gulp.dest('front-end/dist/api/')
-	]);
+gulp.task('clean', function () {
+	gulp.src(path.cleanPath, {read: false})
+		.pipe(clean())
+});
 
-	conbined.on('error',errorHandle);
+gulp.task('watch', function () {
+	livereload.listen();
+
+	gulp.watch(path.lessPath, ['lessCSS']);
+	gulp.watch(path.angularJSPath, ['uglifyAngularJS']);
+	gulp.watch(path.jsPath, ['uglifyJS']);
+});
+
+
+gulp.task('lessCSS', function () {
+	var combined = combine.obj([
+		gulp.src(path.lessPath),
+		plumber(),
+		sourcemaps.init(),
+		less(),
+		minifyCSS(),
+		sourcemaps.write('./maps'),
+		gulp.dest(path.destLessPath),
+		livereload()
+	]);
+	combined.on('error',log);
 });
 
 gulp.task('uglifyJS', function () {
-	var conbined = combine.obj([
-		gulp.src('front-end/assets/js/**.js'),
+	var combined = combine.obj([
+		gulp.src(path.jsPath),
+		plumber(),
+		sourcemaps.init(),
+		rename('customer.min.js'),
 		uglify(),
-		gulp.dest('front-end/dist/assets/js')
+		sourcemaps.write('./maps'),
+		gulp.dest(path.destJSPath),
+		livereload()
 	]);
-	conbined.on('error',errorHandle);
+	combined.on('error',log);
 });
 
-gulp.task('lessCSS', function () {
-	var conbined = combine.obj([
-		gulp.src('front-end/assets/styles/**.less'),
-		less(),
-		minify(),
-		gulp.dest('front-end/dist/assets/styles')
+gulp.task('uglifyAngularJS', function () {
+	var combined = combine.obj([
+		gulp.src(path.angularJSPath),
+		plumber(),
+		sourcemaps.init(),
+		concat('all.js'),
+		gulp.dest(path.destAngularJSPath),
+		rename('all.min.js'),
+		uglify(),
+		sourcemaps.write('./maps'),
+		gulp.dest(path.destAngularJSPath),
+		livereload()
 	]);
-	conbined.on('error',errorHandle);
+	combined.on('error',log);
 });
 
-gulp.task('watch',function () {
-	livereload.listen();
-
-	gulp.watch('front-end/**').on('change',function (file) {
-		livereload.changed(file);
-	});
-
-	gulp.watch('index.html').on('change', function (file) {
-		livereload.changed(file);
-	});
-});
-
-gulp.task('default', ['uglifyJS','lessCSS','uglifyAngular','watch'],function () {
-	gulp.watch('front-end/assets/js/**',['uglifyJS']);
-	gulp.watch('front-end/assets/styles/**.less',['lessCSS']);
-	gulp.watch('front-end/api/**',['uglifyAngular']);
-});
+gulp.task('default',['uglifyAngularJS','uglifyJS','lessCSS','watch']);
