@@ -37,6 +37,7 @@ function export_raw(name, data) {
     var export_blob = new Blob([data]);
 
     var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+    save_link.characterSet = 'UTF-8';
     save_link.href = urlObject.createObjectURL(export_blob);
     save_link.download = name;
     fake_click(save_link);
@@ -47,8 +48,21 @@ function toText() {
 }
 
 function toHTML() {
-	export_raw('download.html',document.getElementById('outputText').innerHTML);
+	export_raw('download.html',generateHTML(document.getElementById('outputText').innerHTML));
 }
 
-
+function generateHTML(source) {
+	var html = '<!DOCTYPE html>' +
+			   '<html>' +
+			   '<head lang="en">' +
+			   '<meta charset="UTF-8">' + 
+			   '<title>markdowm</title>' +
+			   '</head>' +
+			   '<body>' +
+			   source + 
+			   '</body>' +
+			   '</html>'
+	;
+	return html;
+}
 
