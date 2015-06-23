@@ -13,24 +13,20 @@ var guitl = require('gulp-util');
 var plumber = require('gulp-plumber');
 var combine = require('stream-combiner2');
 
-/*
-	config path 
- */
 
 var path = {
 	lessPath: 'front-end/assets/styles/**.less',
 	jsPath: 'front-end/assets/js/**.js',
 	angularJSPath: 'front-end/api/**.js',
-	
+	indexPath: 'index.html',
+
 	cleanPath: 'front-end/dist/**',
 	destLessPath: 'front-end/dist/assets/styles',
 	destJSPath: 'front-end/dist/assets/js',
 	destAngularJSPath : 'front-end/dist/api'
 }
 
-/*
-	config path
- */
+
 
 
 function log(err) {
@@ -55,8 +51,13 @@ gulp.task('watch', function () {
 	gulp.watch(path.lessPath, ['lessCSS']);
 	gulp.watch(path.angularJSPath, ['uglifyAngularJS']);
 	gulp.watch(path.jsPath, ['uglifyJS']);
+	gulp.watch(path.indexPath,['watchHTML']);
 });
 
+gulp.task('watchHTML', function () {
+	gulp.src(path.indexPath)
+		.pipe(livereload());
+});
 
 gulp.task('lessCSS', function () {
 	var combined = combine.obj([

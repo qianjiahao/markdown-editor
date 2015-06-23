@@ -37,7 +37,6 @@ function export_raw(name, data) {
     var export_blob = new Blob([data]);
 
     var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
-    save_link.characterSet = 'UTF-8';
     save_link.href = urlObject.createObjectURL(export_blob);
     save_link.download = name;
     fake_click(save_link);
